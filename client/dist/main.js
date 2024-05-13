@@ -34834,16 +34834,12 @@ let HomeComponent = class HomeComponent {
         }
     }
     onGoToLink(event) {
-        if (event.indexOf('://') >= 0) {
+        if (event.indexOf('://') >= 0 || event[0] == '/') {
             this.showHomeLink = true;
             this.changeDetector.detectChanges();
             this.setIframe(event);
         }
         else {
-            console.log(event);
-            if (event[0] == '/') {
-                window.location.href = event;
-            }
             this.router.navigate([event]).then(data => {
             }).catch(err => {
                 console.error('Route ' + event + '  not found, redirection stopped with no error raised');
