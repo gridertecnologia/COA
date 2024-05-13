@@ -219,6 +219,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
             this.setIframe(event);
 
         } else {
+            console.log(event);
+            if (event[0] == '/') {
+                window.location.href = event;
+            }
             this.router.navigate([event]).then(data => {
             }).catch(err => {
                 console.error('Route ' + event + '  not found, redirection stopped with no error raised');
