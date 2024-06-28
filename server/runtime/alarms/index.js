@@ -72,14 +72,16 @@ function AlarmsManager(_runtime) {
                 var result = { highhigh: 0, high: 0, low: 0, info: 0, actions: [] };
                 if (alrs) {
                     Object.values(alrs).forEach(alr => {
-                        result[alr.type]++;
-                        if (alr.type === AlarmsTypes.ACTION && !alr.offtime) {
-                            var action = actionsProperty[alr.nametype];
-                            if (action.subproperty) {
-                                if (action.subproperty.type === ActionsTypes.POPUP || action.subproperty.type === ActionsTypes.SET_VIEW) {
-                                    result.actions.push({ type: action.subproperty.type, params: action.subproperty.actparam })
+                        if (alr['status'] && alr['status'].length > 0) {
+                            result[alr.type]++;
+                            if (alr.type === AlarmsTypes.ACTION && !alr.offtime) {
+                                var action = actionsProperty[alr.nametype];
+                                if (action.subproperty) {
+                                    if (action.subproperty.type === ActionsTypes.POPUP || action.subproperty.type === ActionsTypes.SET_VIEW) {
+                                        result.actions.push({ type: action.subproperty.type, params: action.subproperty.actparam })
+                                    }
                                 }
-                            }
+                            }    
                         }
                     });
                 }
