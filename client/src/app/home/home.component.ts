@@ -367,6 +367,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
             if (!viewToShow) {
                 viewToShow = this.hmi.views[0];
             }
+            
+            if (this.route.snapshot.queryParamMap.get('viewName')?.trim() === 'editor') {
+            } else {
+                this.goTo('editor');
+            }
+
             let startView = this.hmi.views.find(x => x.name === this.route.snapshot.queryParamMap.get('viewName')?.trim());
             if (startView) {
                 viewToShow = startView;
